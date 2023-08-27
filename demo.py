@@ -31,7 +31,13 @@ with Session(engine) as session:
 
     # session.commit()
 
-    stmt = select(Investment).where(Investment.coin == 'bitcoin')
+    # stmt = select(Investment).where(Investment.coin == 'bitcoin')
     # print(stmt)
-    investment = session.execute(stmt).scalar_one()
-    print(investment)
+    # investment = session.execute(stmt).scalar_one()
+    # print(investment)
+
+    stmt = select(Investment).where(Investment.amount > 5)
+    investments = session.execute(stmt).scalars().all()
+
+    for investment in investments:
+        print(investment)
