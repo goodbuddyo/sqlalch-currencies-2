@@ -31,5 +31,7 @@ with Session(engine) as session:
 
     # session.commit()
 
-    stmt = select(Investment)
-    print(stmt)
+    stmt = select(Investment).where(Investment.coin == 'bitcoin')
+    # print(stmt)
+    investment = session.execute(stmt).scalar_one()
+    print(investment)
