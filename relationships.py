@@ -50,6 +50,8 @@ portfolio_2 = Portfolio(name="Portfolio 2", description="Description 2")
 
 bitcoin.portfolio = portfolio_1
 
+portfolio_2.investments.extend([ethereum, dogecoin])
+
 with Session(engine) as session:
     # session.add(bitcoin)
     session.add(portfolio_2)
