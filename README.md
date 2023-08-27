@@ -1,51 +1,40 @@
-# SQLAlch-Currencies-2 README
-This is the part 2: Create SQLAlchemy version of a currency app. It demonstrates the use of Python and the Click package to create a CLI for returning crypto currency investment info stored in a SQLite DB using SQLAlchemy. The currency, date and current price data are provided using an api from CoinGecko https://www.coingecko.com/ 
+# README
+### This is for Part 2 - SQLAlch-Currencies-2: 
 
-This app is based on an awesome Pluralsight tutorial by Douglas Starnes who pateiently explains, line by line, how the app works. https://www.pluralsight.com/
+While the Part 1 (SQLAlch-Currencies) app used SQL statements to populate an SQLite DB for crypto currency investments, this Part 2 app (SQLAlch-Currencies-2) uses the SQLAlchemy ORM and the SQLAlchemy Core API to populate a similar but separate SQLite DB. A comparing the apps helps demonstrate the pros and cons of each method.
 
-While the Part 1 (SQLAlch-Currencies) app used SQL statements to populate an SQLite DB, this part 2 app (SQLAlch-Currencies-2) uses the SQLAlchemy ORM and Core API to populates a separate SQLite DB. A comparison of the SQL and SQLAlchemy methods helps to demonstrate some of the pros and cons of each.
+The crypto currency date and rate data is provided with an api from CoinGecko https://www.coingecko.com/ 
+
+These apps are based on an awesome Pluralsight tutorial by Douglas Starnes who pateiently explains, line by line, how the apps work. https://www.pluralsight.com/. Pluralsight is awesome and Mr. Starnes is a Tech Rock star.
+
+The steps below outline how to use the app, and comments are provided to hightlight the requirements for this assignment.
 
 
 ### SQLAlch-Currencies-2 Getting Started
 
-After cloning the SQLAlch-Currencies-2 repo, cd to the folder, create a venv and install the requests, click and SQLAlchemy packages.
+After cloning the SQLAlch-Currencies-2 repo, cd to the folder, create a venv. 
+Install the requests, click and SQLAlchemy packages.
 
 $ python -m venv venv
 $ source venv/bin/activate
 (venv) $ python -m pip install requests SQLAlchemy click
 
+Other packages used are already part of the Python Standard Library
 
-The other imported packages are already part of the Python Standard Library
+----------------------------------
+#### CLI instructions: 
 
-  click 
-  sqlite3
-  datetime
+CRUD commands for updating the SQLite DB file can be found in the demo.py file.
+Uncomment only the specified code as marked in the demo.py file for each CRUD command, then run python demo.py in the terminal.
+You will need to re-comment out the code to view each CRUD method individually
+In VSCode, the DB changes can be viewed using the SQLite extention
+
+  - In the VSCode explorer, right click the DB file and select Open Database
+  - Expand the resulting lower SQLITE EXPLORER tab
+  - Expand the DB name and table name arrows to see the table cols
+  - Right click the arrow next to the table name and select "Show Table" to open a view of the table cols and rows
 
 
 ----------------------------------
-CLI request examples: 
-
-A simple test
-Request the current price of the default crypto currency: bitcoin in usd  
-(venv) $ python get_price.py
-
-Request the current price of specific crypto currencies by specifying coin_id and currency
-(venv) $ python main.py --coin_id=ethereum --currency=gbp
-
-Add an investment to the db, specify coin_id, currency and amount
-(venv) $ python main.py add-investment --coin_id=bitcoin --currency=usd --amount=1
-
-Calculate the total value of a crypto currency you own (as listed in the db)
-in the currency specified
-(venv) $ python main.py get-investment-value --coin_id=bitcoin --currency=usd
-
-Import multiple crypto currency investments into the db from a .csv file.
-(venv) $ python main.py import-investments --csv_file investments.csv
-
-----------------------------------
-
-This CLI provides only a limited number of commands to demonstrate the use of SQL for populating an SQLite db.
-
-The Part 2 app SQLAlch-Currencies-2 will demonstrate additional commands using SQLAlchemy
 
 

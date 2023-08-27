@@ -26,18 +26,61 @@ ethereum = Investment(coin="ethereum", currency="GBP", amount="10.0")
 dogecoin = Investment(coin="dogecoin", currency="EUR", amount="100.0")
 
 with Session(engine) as session:
-    # session.add(bitcoin)
-    # session.add_all([ethereum, dogecoin])
 
+    # --------------------------------
+    # -- CRUD EXAMPLES
+    # -- uncomment this code to see a single CREATE example
+
+    # session.add(bitcoin)
     # session.commit()
+
+    # --------------------------------
+    # -- uncomment this code to see a CREATE many example
+
+    # session.add_all([ethereum, dogecoin])
+    # session.commit()
+
+    # --------------------------------
+    # -- uncomment this code to see 3 different READ examples
 
     # stmt = select(Investment).where(Investment.coin == 'bitcoin')
     # print(stmt)
+
     # investment = session.execute(stmt).scalar_one()
     # print(investment)
 
-    stmt = select(Investment).where(Investment.amount > 5)
-    investments = session.execute(stmt).scalars().all()
+    # stmt = select(Investment).where(Investment.amount > 5)
+    # investments = session.execute(stmt).scalars().all()
 
-    for investment in investments:
-        print(investment)
+    # for investment in investments:
+    #    print(investment)
+
+    # --------------------------------
+    # -- uncomment this code to see a CRUD UPDATE example
+    # -- The amount attribute of the id = 1 element is updated to 1.234
+    # -- notice the dirty attribute
+
+    bitcoin = session.get(Investment, 1)
+    bitcoin.amount = 1.234
+    print(session.dirty)
+    session.commit()
+
+    print(bitcoin)
+
+    # --------------------------------
+    # -- uncomment this code to see a CRUD DELETE example
+    # -- But first view the db table
+    # -- Enter the id of the the row you wish to delete as the 2nd get() param
+
+    dogecoin = session.get(Investment, 3)
+    session.delete(dogecoin)
+    print(session.deleted)
+    session.commit()
+
+    # --------------------------------
+    # -- uncomment this code to replace the deleted example
+
+    # session.add(dogecoin)
+    # session.commit()
+
+    # --------------------------------
