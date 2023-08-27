@@ -1,4 +1,4 @@
-from sqlalchemy import String, Numeric, create_engine
+from sqlalchemy import String, Numeric, create_engine, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 
 
@@ -26,7 +26,10 @@ ethereum = Investment(coin="ethereum", currency="GBP", amount="10.0")
 dogecoin = Investment(coin="dogecoin", currency="EUR", amount="100.0")
 
 with Session(engine) as session:
-    session.add(bitcoin)
-    session.add_all([ethereum, dogecoin])
+    # session.add(bitcoin)
+    # session.add_all([ethereum, dogecoin])
 
-    session.commit()
+    # session.commit()
+
+    stmt = select(Investment)
+    print(stmt)
