@@ -64,7 +64,32 @@ def cli():
 
 @click.command(help="View the investments in a portfolio")
 def view_portfolio():
-    pass
+    with Session(engine) as session:
+        stmt = select(Portfolio)
+        all_portfolios = session.execute(stmt).scalars().all()
+
+        for index, portfolio in enumerate(all_portfolios):
+            print(f"{index + 1}: {portfolio.name}")
+
+        portfolio_id = int(input("Select a portfolio: ")) - 1
+        portfolio = all_portfolios[portfolio_id]
+
+        investments = portfolio.investments
+
+        coins = set([investment.coin for investment in investments])
+        currencies = set([investment.currency for investment in investments])
+
+        coin_prices = get_coin_prices(coins, currencies)
+
+        print(f"Investments in {portfolio.name}")
+        for index, investment in enumerate(investments):
+            coin_price = coin_prices[investment.coin][investment.currency.lower(
+            )]
+            total_price = float(investment.amount) * coin_price
+            print(
+                f"{index + 1}: {investment.coin} {total_price:.2f} {investment.currency}")
+
+        print("Prices provided by CoinGecko")
 
 
 @click.command(help="Create a new investment and add it to a portfolio")
