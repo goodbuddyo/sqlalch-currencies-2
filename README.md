@@ -24,7 +24,7 @@ Other packages used are already part of the Python Standard Library
 ----------------------------------
 #### CLI instructions: 
 
-CRUD commands for updating the SQLite DB file can be found in the demo.py file.
+CRUD commands for updating the SQLite DB file can be found in the demo.py file comments.
 Uncomment only the specified code as marked in the demo.py file for each CRUD command, then run python demo.py in the terminal.
 You will need to re-comment out the code to view each CRUD method individually
 In VSCode, the DB changes can be viewed using the SQLite extention
@@ -36,5 +36,7 @@ In VSCode, the DB changes can be viewed using the SQLite extention
 
 
 ----------------------------------
+
+The relationshops.py file 
 
 

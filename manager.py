@@ -6,18 +6,15 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session, rela
 import click
 import requests
 
-
 # this function will combine multiple coin requests into one
 # to address the coingecko free account limit
+
 
 def get_coin_prices(coins, currencies):
     coin_csv = ",".join(coins)
     currency_csv = ",".join(currencies)
-
     COINGECKO_URL = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_csv}&vs_currencies={currency_csv}"
-
     data = requests.get(COINGECKO_URL).json()
-
     return data
 
 
@@ -55,8 +52,8 @@ class Investment(Base):
         return f"<Investment coin: {self.coin}, currency: {self.currency}, amount: {self.amount}>"
 
 
-# engine = create_engine("sqlite:///manager.db")
-engine = create_engine("postgresql://postgres:pgpassword@localhost/manager")
+engine = create_engine("sqlite:///manager.db")
+# engine = create_engine("postgresql://postgres:pgpassword@localhost/manager")
 Base.metadata.create_all(engine)
 
 
@@ -82,7 +79,11 @@ def add_investment(coin, currency, amount):
 @click.option("--name", prompt=True)
 @click.option("--description", prompt=True)
 def add_portfolio(name, description):
-    pass
+    portfolio = Portfolio(name=name, description=description)
+    with Session(engine) as session:
+        session.add(portfolio)
+        session.commit()
+    print(f"Added portfolio {name}")
 
 
 @click.command(help="Drop all tables in the database")
@@ -94,7 +95,7 @@ def clear_database():
 cli.add_command(clear_database)
 cli.add_command(add_portfolio)
 cli.add_command(add_investment)
-
+cli.add_command(view_portfolio)
 
 if __name__ == "__main__":
     cli()
