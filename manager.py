@@ -65,6 +65,26 @@ def cli():
     pass
 
 
+@click.command(help="View the investments in a portfolio")
+def view_portfolio():
+    pass
+
+
+@click.command(help="Create a new investment and add it to a portfolio")
+@click.option("--coin", prompt=True)
+@click.option("--currency", prompt=True)
+@click.option("--amount", prompt=True)
+def add_investment(coin, currency, amount):
+    pass
+
+
+@click.command(help="Create a new portfolio")
+@click.option("--name", prompt=True)
+@click.option("--description", prompt=True)
+def add_portfolio(name, description):
+    pass
+
+
 @click.command(help="Drop all tables in the database")
 def clear_database():
     Base.metadata.drop_all(engine)
@@ -72,6 +92,8 @@ def clear_database():
 
 
 cli.add_command(clear_database)
+cli.add_command(add_portfolio)
+cli.add_command(add_investment)
 
 
 if __name__ == "__main__":
