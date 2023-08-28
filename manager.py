@@ -65,5 +65,14 @@ def cli():
     pass
 
 
+@click.command(help="Drop all tables in the database")
+def clear_database():
+    Base.metadata.drop_all(engine)
+    print("Database cleared!")
+
+
+cli.add_command(clear_database)
+
+
 if __name__ == "__main__":
     cli()
