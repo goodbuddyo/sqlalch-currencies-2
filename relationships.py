@@ -53,6 +53,22 @@ bitcoin.portfolio = portfolio_1
 portfolio_2.investments.extend([ethereum, dogecoin])
 
 with Session(engine) as session:
+    # -- uncomment session.add(bitcoin) and run the file
+    # -- you can then in demo_r.db investment table
+    # -- one bitcoin was added to the investment table
+    # -- and one portfolio added to the portfolio table
+
     # session.add(bitcoin)
-    session.add(portfolio_2)
+
+    # ---------------------------------
+
+    # -- uncomment session.add(portfolio_2) and run the file
+    # -- you can then in demo_r.db investment table
+    # -- two more bitcoins were added to the investment table
+    # -- and one portfolio added to the portfolio table
+
+    # session.add(portfolio_2)
+
+    # ----------------------------------
+
     session.commit()
